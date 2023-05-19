@@ -1,11 +1,12 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "@/styles/Home.module.css";
+import { connectDB } from "@/util/database";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({ result }) {
   return (
     <>
       <Head>
@@ -26,7 +27,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              By{' '}
+              By{" "}
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"
@@ -51,6 +52,20 @@ export default function Home() {
         </div>
 
         <div className={styles.grid}>
+          {result.map((data) => (
+            <a
+              href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+              className={styles.card}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={data.title}
+            >
+              <h2>
+                {data.title} <span>-&gt;</span>
+              </h2>
+              <p> {data.content}</p>
+            </a>
+          ))}
           <a
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className={styles.card}
@@ -110,5 +125,20 @@ export default function Home() {
         </div>
       </main>
     </>
-  )
+  );
+}
+
+export async function getServerSideProps() {
+  const client = await connectDB;
+  const db = client.db("vercel-test");
+  const result = await db
+    .collection("products")
+    .find({}, { projection: { _id: 0 } })
+    .toArray();
+
+  return {
+    props: {
+      result: JSON.parse(JSON.stringify(result)),
+    },
+  };
 }
