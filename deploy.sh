@@ -1,10 +1,11 @@
+#!/bin/bash
 REPOSITORY=/home/ubuntu/deploy
-
 cd $REPOSITORY
+git pull origin main
 
-sudo npm install
+sudo npm install 
+sudo npm run build 
 
-sudo npx pm2 reload all
-
+pm2 restart next-app
 
 
