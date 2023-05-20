@@ -13,6 +13,13 @@ jobs:
       - name: Check Node v
         run: node -v
 
+      - name: ⚙️ 환경변수를 설정합니다.
+        working-directory: ./
+        run: |
+          pwd
+          touch .env
+          echo DATABASE_URL=${{ secrets.MONGODB_URI }} >> .env
+
       - name: Install & Build
         run: |
           npm install
