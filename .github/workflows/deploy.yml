@@ -14,7 +14,7 @@ jobs:
         run: node -v
 
       - name: ⚙️ 환경변수를 설정합니다.
-        working-directory: ./
+        working-directory: ./deploy
         run: |
           pwd
           touch .env
