@@ -2,7 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { connectDB } from "@/util/database";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -129,16 +128,20 @@ export default function Home({ result }) {
 }
 
 export async function getServerSideProps() {
-  const client = await connectDB;
-  const db = client.db("vercel-test");
-  const result = await db
-    .collection("products")
-    .find({}, { projection: { _id: 0 } })
-    .toArray();
+  const result = [
+    {
+      title: "제목1",
+      content: "내용1",
+    },
+    {
+      title: "제목2",
+      content: "내용2",
+    },
+  ];
 
   return {
     props: {
-      result: JSON.parse(JSON.stringify(result)),
+      result,
     },
   };
 }
