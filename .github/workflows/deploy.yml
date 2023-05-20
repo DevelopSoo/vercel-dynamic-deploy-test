@@ -38,4 +38,4 @@ jobs:
           --application-name nextjs-codeDeploy
           --deployment-config-name CodeDeployDefault.AllAtOnce
           --deployment-group-name nextjs-codeDeploy-group
-          --s3-location bucket=nextjs-dynamic,key=test-build.zip,bundleType=zip
+          --s3-location bucket=nextjs-dynamic,bundleType=zip,key=test-build.zip

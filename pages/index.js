@@ -72,7 +72,7 @@ export default function Home({ result }) {
             rel="noopener noreferrer"
           >
             <h2>
-              Docs <span>-&gt;</span>
+              하하하 <span>-&gt;</span>
             </h2>
             <p>
               Find in-depth information about Next.js features and&nbsp;API.

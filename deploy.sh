@@ -2,6 +2,11 @@ REPOSITORY=/home/ubuntu/deploy
 
 cd $REPOSITORY
 
-sudo npm install
+git pull origin main
 
-sudo npx pm2 reload all
+sudo npm install && npm run build
+
+sudo pm2 restart nextjs-app
+
+
+
